@@ -11,8 +11,8 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    bringup_dir = get_package_share_directory('navigation_executor')
-    # bringup_dir = '/home/fmasa/ros2_ws/src/test_ros2_navigation'
+    share_dir = get_package_share_directory('navigation_executor')
+    bringup_dir = share_dir + '/config'
 
     namespace = LaunchConfiguration('namespace')
     map_yaml_file = LaunchConfiguration('map')

@@ -14,7 +14,7 @@ from launch_ros.actions import PushRosNamespace
 def generate_launch_description():
     # Get the launch directory
     bringup_dir = get_package_share_directory('navigation_executor')
-    # bringup_dir = '/home/fmasa/ros2_ws/src/test_ros2_navigation'
+    config_dir = os.path.join(bringup_dir, 'config')
     launch_dir = os.path.join(bringup_dir, 'launch')
 
     # Create the launch configuration variables
@@ -56,13 +56,13 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
+        default_value=os.path.join(config_dir, 'params', 'nav2_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_bt_xml_cmd = DeclareLaunchArgument(
         'default_bt_xml_filename',
         default_value=os.path.join(
-            get_package_share_directory('navigation_executor') + 'config',
+            config_dir,
             'behavior_trees', 'navigate_w_replanning_and_recovery.xml'),
         description='Full path to the behavior tree xml file to use')
 
