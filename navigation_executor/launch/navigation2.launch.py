@@ -29,12 +29,13 @@ def generate_launch_description():
             param_file_name))
 
     # <path>
-    _dir = get_package_share_directory('navigation_executor')
-    nav2_launch_file_dir = _dir + '/launch'
+    pkg_dir = get_package_share_directory('navigation_executor')
+    nav2_launch_file_dir = os.path.join(pkg_dir, 'launch')
+    config_dir = os.path.join(pkg_dir, 'config')
 
     rviz_config_dir = os.path.join(
-        get_package_share_directory('nav2_bringup'),
-        # _dir,
+        # get_package_share_directory('nav2_bringup'),
+        config_dir,
         'rviz',
         'nav2_default_view2.rviz')
 

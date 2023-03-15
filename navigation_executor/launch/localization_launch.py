@@ -11,8 +11,8 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    share_dir = get_package_share_directory('navigation_executor')
-    bringup_dir = share_dir + '/config'
+    pkg_dir = get_package_share_directory('navigation_executor')
+    config_dir = os.path.join(pkg_dir, 'config')
 
     namespace = LaunchConfiguration('namespace')
     map_yaml_file = LaunchConfiguration('map')
@@ -45,7 +45,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'map',
-            default_value=os.path.join(bringup_dir, 'maps', 'cit_3f_map.yaml'),
+            default_value=os.path.join(config_dir, 'maps', 'cit_3f_map.yaml'),
             description='Full path to map yaml file to load'),
 
         DeclareLaunchArgument(
@@ -58,7 +58,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'params_file',
-            default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
+            default_value=os.path.join(config_dir, 'params', 'nav2_params.yaml'),
             description='Full path to the ROS2 parameters file to use'),
 
         Node(
