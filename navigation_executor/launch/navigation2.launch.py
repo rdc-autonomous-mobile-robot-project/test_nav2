@@ -8,33 +8,30 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
-TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
-
-
 def generate_launch_description():
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
-    map_dir = LaunchConfiguration(
-        'map',
-        default=os.path.join(
-            get_package_share_directory('turtlebot3_navigation2'),
-            'map',
-            'map.yaml'))
-
-    param_file_name = TURTLEBOT3_MODEL + '.yaml'
-    param_dir = LaunchConfiguration(
-        'params',
-        default=os.path.join(
-            get_package_share_directory('turtlebot3_navigation2'),
-            'param',
-            param_file_name))
-
     # <path>
     pkg_dir = get_package_share_directory('navigation_executor')
     nav2_launch_file_dir = os.path.join(pkg_dir, 'launch')
     config_dir = os.path.join(pkg_dir, 'config')
 
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    map_dir = LaunchConfiguration(
+        'map',
+        default=os.path.join(
+            config_dir,
+            'maps',
+            'cit_3f_map.yaml'))
+
+    param_file_name = 'nav2_params.yaml'
+
+    param_dir = LaunchConfiguration(
+        'params',
+        default=os.path.join(
+            config_dir,
+            'param',
+            param_file_name))
+
     rviz_config_dir = os.path.join(
-        # get_package_share_directory('nav2_bringup'),
         config_dir,
         'rviz',
         'nav2_default_view2.rviz')
